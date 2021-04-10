@@ -40,13 +40,18 @@ public class BinaryTreeTest {
         Assertions.assertEquals(root.getValue(),1);
     }
 
+    Iterator<Integer> makeListIter(Integer[] arr){
+        List<Integer> resultList = Arrays.asList(arr);
+
+        return resultList.iterator();
+    }
     @Test
     void dfsCheck(){
-        List<Integer> resultList = Arrays.asList(new Integer[]{1,2,4,8,3,5,7,6});
-        List<Integer> dfsList= tree.dfs(root);
+        Iterator<Integer>resultIt = makeListIter(new Integer[]{1,2,4,8,3,5,7,6});
 
-        Iterator<Integer> resultIt = resultList.iterator();
+        List<Integer> dfsList= tree.dfs(root);
         Iterator<Integer> dfsIt = dfsList.iterator();
+
         while(resultIt.hasNext()){
             if(dfsIt.hasNext()){
                 Assertions.assertEquals(dfsIt.next(),resultIt.next());
@@ -59,11 +64,11 @@ public class BinaryTreeTest {
 
     @Test
     void bfsCheck(){
-        List<Integer> resultList = Arrays.asList(new Integer[]{1,2,3,4,8,5,6,7});
-        List<Integer> bfsList= tree.bfs(root);
+        Iterator<Integer>resultIt = makeListIter(new Integer[]{1,2,4,8,3,5,7,6});
 
-        Iterator<Integer> resultIt = resultList.iterator();
+        List<Integer> bfsList= tree.bfs(root);
         Iterator<Integer> bfsIt = bfsList.iterator();
+
         while(resultIt.hasNext()){
             if(bfsIt.hasNext()){
                 Assertions.assertEquals(bfsIt.next(),resultIt.next());
