@@ -4,6 +4,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+
 public class BinaryTreeTest {
 
     private BinaryTree tree;
@@ -33,22 +37,41 @@ public class BinaryTreeTest {
 
     @Test
     void rootCheck(){
-        Assertions.assertEquals(root,1);
+        Assertions.assertEquals(root.getValue(),1);
     }
 
     @Test
     void dfsCheck(){
-        int[] result = {1,2,4,8,3,5,7,6};
-        int[] dfsList= tree.dfs(root);
-        Assertions.assertArrayEquals(result,dfsList);
+        List<Integer> resultList = Arrays.asList(new Integer[]{1,2,4,8,3,5,7,6});
+        List<Integer> dfsList= tree.dfs(root);
+
+        Iterator<Integer> resultIt = resultList.iterator();
+        Iterator<Integer> dfsIt = dfsList.iterator();
+        while(resultIt.hasNext()){
+            if(dfsIt.hasNext()){
+                Assertions.assertEquals(dfsIt.next(),resultIt.next());
+            }
+            else{
+                Assertions.fail();
+            }
+        }
     }
 
     @Test
     void bfsCheck(){
-        int[] result = {1,2,3,4,8,5,6,7};
-        int[] bfsList= tree.dfs(root);
+        List<Integer> resultList = Arrays.asList(new Integer[]{1,2,3,4,8,5,6,7});
+        List<Integer> bfsList= tree.bfs(root);
 
-        Assertions.assertArrayEquals(result,bfsList);
+        Iterator<Integer> resultIt = resultList.iterator();
+        Iterator<Integer> bfsIt = bfsList.iterator();
+        while(resultIt.hasNext()){
+            if(bfsIt.hasNext()){
+                Assertions.assertEquals(bfsIt.next(),resultIt.next());
+            }
+            else{
+                Assertions.fail();
+            }
+        }
 
     }
 
