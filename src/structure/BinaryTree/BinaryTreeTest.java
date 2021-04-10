@@ -42,45 +42,48 @@ public class BinaryTreeTest {
 
     Iterator<Integer> makeListIter(Integer[] arr){
         List<Integer> resultList = Arrays.asList(arr);
-
+        
         return resultList.iterator();
     }
     @Test
     void dfsCheck(){
         Iterator<Integer>resultIt = makeListIter(new Integer[]{1,2,4,8,3,5,7,6});
-
         List<Integer> dfsList= tree.dfs(root);
-        Iterator<Integer> dfsIt = dfsList.iterator();
 
-        while(resultIt.hasNext()){
-            if(dfsIt.hasNext()){
-                Assertions.assertEquals(dfsIt.next(),resultIt.next());
-            }
-            else{
-                Assertions.fail();
-            }
+        Iterator<Integer> dfsIt = dfsList.iterator();
+        while(resultIt.hasNext() && dfsIt.hasNext()){
+            Assertions.assertEquals(dfsIt.next(),resultIt.next());
+        }
+        if(resultIt.hasNext() || dfsIt.hasNext()){
+            Assertions.fail();
         }
     }
 
     @Test
     void bfsCheck(){
-        Iterator<Integer>resultIt = makeListIter(new Integer[]{1,2,4,8,3,5,7,6});
-
+        Iterator<Integer>resultIt = makeListIter(new Integer[]{1,2,3,4,8,5,6,7});
         List<Integer> bfsList= tree.bfs(root);
+
         Iterator<Integer> bfsIt = bfsList.iterator();
-
-        while(resultIt.hasNext()){
-            if(bfsIt.hasNext()){
-                Assertions.assertEquals(bfsIt.next(),resultIt.next());
-            }
-            else{
-                Assertions.fail();
-            }
+        while(resultIt.hasNext() && bfsIt.hasNext()){
+            Assertions.assertEquals(bfsIt.next(),resultIt.next());
         }
-
+        if(resultIt.hasNext() || bfsIt.hasNext()){
+            Assertions.fail();
+        }
     }
 
+    @Test
+    void dupBfsCheck(){
+        bfsCheck();
+        bfsCheck();
+    }
 
+    @Test
+    void dupDfsCheck(){
+        dfsCheck();
+        dfsCheck();
+    }
 
 }
 

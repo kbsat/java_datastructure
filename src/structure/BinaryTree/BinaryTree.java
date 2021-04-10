@@ -18,20 +18,27 @@ public class BinaryTree {
         return root;
     }
 
-    public List<Integer> dfs(Node cur){
+    public void clearList(){
+        result.clear();
+        queue.clear();
+    }
 
+    public List<Integer> getList() {
+        return result;
+    }
+
+        public List<Integer> dfsLogic(Node cur){
         if(cur != null){
             result.add(cur.getValue());
             System.out.print(cur.getValue()+"->");
-            dfs(cur.getLeft());
-            dfs(cur.getRight());
+            dfsLogic(cur.getLeft());
+            dfsLogic(cur.getRight());
         }
 
         return result;
     }
 
-    public List<Integer> bfs(Node cur){
-
+    public List<Integer> bfsLogic(Node cur){
         if(cur == null){
             return result;
         }
@@ -59,4 +66,15 @@ public class BinaryTree {
 
         return result;
     }
+
+    public List<Integer> dfs(Node cur){
+        clearList();
+        return dfsLogic(cur);
+    }
+
+    public List<Integer> bfs(Node cur){
+        clearList();
+        return bfsLogic(cur);
+    }
+
 }
