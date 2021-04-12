@@ -26,7 +26,7 @@ class LinkedListTest {
         }
 
         for (int i = 0;i<10;i++){
-            Assertions.assertEquals(list.getData(head,i),i);
+            assertEquals(list.getData(head,i),i);
         }
 
     }
@@ -38,7 +38,7 @@ class LinkedListTest {
         for (int i = 0; i < 10; i++) {
             head = list.add(head, new ListNode(i), i);
         }
-        list.print(head);
+
         list.remove(head,1);
         list.remove(head,3);
         list.remove(head,5);
@@ -57,9 +57,9 @@ class LinkedListTest {
         }
 
         for(int i=0;i<5;i++){
-            assertEquals(list.contains(head,i),true);
+            assertEquals(list.contains(head,nodes[i]),true);
         }
-        assertEquals(list.contains(head,100),false);
+        assertEquals(list.contains(head,new ListNode(100)),false);
     }
 
 }
