@@ -5,20 +5,25 @@ public class LinkedList {
     public ListNode add(ListNode head, ListNode nodeToAdd, int position){
         ListNode cur = head;
 
-        if(cur == null){
-            cur = nodeToAdd;
-            return cur;
+        if(position == 0 ){
+            if(cur != null){
+                nodeToAdd.setNext(cur);
+            }
+            return nodeToAdd;
         }
 
-        for(int i=0;i<position;i++){
-            if(cur.getNext() == null){
+        // position이 1이상
+        for(int i = 1;i < position; i++){
+            if(cur.getNext() != null){
+                cur = cur.getNext();
+            } else{
                 break;
             }
-            else{
-                cur = cur.getNext();
-            }
         }
+
+        ListNode temp = cur.getNext();
         cur.setNext(nodeToAdd);
+        nodeToAdd.setNext(temp);
 
         return head;
     }
@@ -34,20 +39,20 @@ public class LinkedList {
             else{
                 prev = cur;
                 cur = cur.getNext();
-
             }
         }
 
-        if(cur != null){
+        if (cur == head){
+            return cur.getNext();
+        }else{
             prev.setNext(cur.getNext());
+            return head;
         }
-
-        return head;
-
     }
 
     public boolean contains(ListNode head, ListNode nodeToCheck){
         ListNode cur = head;
+
         while(cur != null){
             if(cur == nodeToCheck){
                 return true;
